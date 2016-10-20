@@ -1,0 +1,12 @@
+module rotate_right (
+    input a[8],
+    input b[8],        //8-bit B user input
+    input alufn[6],    //6-bit ALUFN user input
+    input shift[8],
+    output rotate_right[8]    //8-bit shift output  
+  ) {
+
+  always {
+    shift=0;
+    case(alufn[1:0}){
+      b01:

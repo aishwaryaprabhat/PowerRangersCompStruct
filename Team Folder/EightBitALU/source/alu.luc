@@ -1,0 +1,58 @@
+module alu (
+    input a[8],             //8-bit A user input
+    input b[8],             //8-bit B user input
+    input alufn[6],         //6-bit ALUFN user input         
+    output out[8],          //8-bit ALU output
+    output z,               //1-bit z output
+    output v,               //1-bit v output 
+    output n                //1-bit n output
+  ) {
+  
+  adder8 adder;             // adder module
+  boole8 boole;             // boolean module
+  compare8 cmp;             // comparator module
+  shift8 shift;             // shifter module
+  
+  always {
+  
+    out = 0;
+    
+    //input for adder
+    adder.a        = a;
+    adder.b        = b;
+    adder.alufn    = alufn;
+    
+    //input for compare 
+    cmp.z          = adder.z;
+    cmp.v          = adder.v;
+    cmp.n          = adder.n;
+    cmp.alufn      = alufn;
+    
+    //input for boole
+    boole.a        = a;
+    boole.b        = b;
+    boole.alufn    = alufn;
+    
+    //input for shift
+    shift.a        = a;
+    shift.b        = b;
+    shift.alufn    = alufn;
+    
+    //check the ALUFN[5:4] to obtain the desired out output
+    case ( alufn[5:4] ){
+      b00:
+        out        = adder.s;
+      b01:
+        out        = boole.boole;
+      b10:
+        out        = shift.shift;
+      b11:
+        out        = cmp.cmp;
+    }  
+    
+    //assign output of z, v, and n
+    z              = adder.z;
+    v              = adder.v;
+    n              = adder.n;
+  }
+}

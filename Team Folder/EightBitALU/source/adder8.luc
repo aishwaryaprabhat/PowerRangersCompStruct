@@ -1,0 +1,42 @@
+module adder8 (
+    input a[8],        //8-bit A user input
+    input b[8],        //8-bit B user input
+    input alufn[6],    //6-bit ALUFN user input
+    output s[8],       //8-bit adder output 
+    output z,          //1-bit z output
+    output v,          //1-bit v output
+    output n           //1-bit n output 
+  ) {
+  
+  sig xb7;             //the higher order bit between the operand of B and ALUFN0 
+  sig ss[8];           //8-bit adder output signal, to be used to obtain z, v, and n
+    
+  always {
+  
+    xb7    = 0;        
+    ss     = 0;        
+
+    //check ALUFN[0] to determine the adder operation
+    case ( alufn[0] ) {
+      b0: //performs ADDITION
+        ss = a + b;
+      b1: //performs SUBSTRACTION
+        ss = a - b;
+    }
+    
+    //obtain xb7 which is the higher order bit between B7 and ALUFN[0]       
+    xb7 = b[7] ^ alufn[0];
+  
+    //obtain z, true(1) when all s bits are zero
+    z = ~(|ss);
+    
+    //obtain v, true(1) when addition operation overflows
+    v = ( a[7] & xb7 & ~ss[7] ) | ( ~a[7] | ~xb7 | ss[7] );
+    
+    //obtain n, true(1) when s is negative overall
+    n = ss[7];
+    
+    //assign ss to s output
+    s = ss;
+  }
+}

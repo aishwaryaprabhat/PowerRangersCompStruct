@@ -1,0 +1,32 @@
+module compare8 (
+    input z,          //1-bit z condition code obtained from zvn
+    input v,          //1-bit v condition code obtained from zvn
+    input n,          //1-bit n condition code obtained from zvn
+    input alufn[6],   //6-bits ALUFN user input 
+    output cmp[8]     //1-bit (true/false) comparator output 
+  ) {
+  
+  sig lsb;
+  
+  always {
+    
+    //intialise 
+    cmp=0;
+    lsb=0;
+    
+    //obtain lsb, check the different cases of input ALUFN[2:1]
+    case ( alufn[2:1] ) {
+    b01: //CMPEQ (A=B)
+      lsb = z;
+      
+    b10: //CMPLT (A<B)
+      lsb = n ^ v;
+      
+    b11: //CMPLE (A<=B)
+      lsb = z | ( n ^ v );
+    }
+    
+    cmp = c{7b0, lsb};
+    
+  }
+}

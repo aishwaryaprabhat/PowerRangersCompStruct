@@ -1,0 +1,36 @@
+module boole8 (
+    input a[8],        //8-bit A user input
+    input b[8],        //8-bit B user input
+    input alufn[6],    //6-bit ALUFN user input
+    output boole[8]    //8-bit boole output
+  ) {
+
+  var i;               
+  var ab;              //2-bit mux input
+  
+  always {
+  
+    boole = 0;
+    
+    //obtain boole, iterate through the different mux input 
+    for ( i=0; i<8; i++ ){
+      //obtain the mux input for ith mux
+      ab = c{ a[i] , b[i] }; 
+      
+      //check the cases for mux
+      case( ab ){
+        b00:
+        boole[i] = alufn[0];
+        
+        b01:
+        boole[i] = alufn[1];
+          
+        b10:
+        boole[i] = alufn[2];
+          
+        b11:
+        boole[i] = alufn[3];
+      }
+    }    
+  }
+}

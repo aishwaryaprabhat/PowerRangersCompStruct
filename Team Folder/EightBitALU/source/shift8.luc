@@ -1,0 +1,44 @@
+module shift8 (
+    input a[8],        //8-bit A user input
+    input b[8],        //8-bit B user input
+    input alufn[6],    //6-bit ALUFN user input
+    output shift[8]    //8-bit shift output  
+  ) {
+
+  always {
+    shift = 0;
+    
+    case (alufn[1:0]){
+      b00: //performs SHL (shift left)
+        if (b[2]==1){
+          shift = a << 4;
+        }
+        if (b[1]==1){
+          shift = a << 2;
+        }
+        if (b[0]==1){
+          shift = a << 1;
+        }
+      b01: //performs SHR (shift right)
+        if (b[2]==1){
+          shift = a >> 4;
+        }
+        if (b[1]==1){
+          shift = a >> 2;
+        }
+        if (b[0]==1){
+          shift = a >> 1;
+        }
+      b11: //performs SRA (shift right with extension)
+        if (b[2]==1){
+          shift = $signed(a) >>> 4;
+        }
+        if (b[1]==1){
+          shift = $signed(a) >>> 2;
+        }
+        if (b[0]==1){
+          shift = $signed(a) >>> 1;
+        }
+    }
+  }
+}
