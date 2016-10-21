@@ -1,12 +1,45 @@
 module rotate_right (
     input a[8],
-    input b[8],        //8-bit B user input
-    input alufn[6],    //6-bit ALUFN user input
-    input shift[8],
-    output rotate_right[8]    //8-bit shift output  
+    input b[8],              //8-bit B user input
+    input alufn[7],          //6-bit ALUFN user input
+    output rotateright[8]    //8-bit shift output  
   ) {
-
+  
+sig k[8];
+  
   always {
-    shift=0;
-    case(alufn[1:0}){
-      b01:
+  
+    rotateright=0;
+    
+    case(alufn[1:0]){
+      b10:
+        if (b[2]==1){
+          k[0]=a[7];
+          k[1]=a[6];
+          k[2]=a[5];
+          k[3]=a[4];
+          rotateright = a >> 4;
+          rotateright[0]=k[3];
+          rotateright[1]=k[2];
+          rotateright[2]=k[1];
+          rotateright[3]=k[0];
+        }
+        if (b[1]==1){
+          k[0]=a[7];
+          k[1]=a[6];
+          rotateright = a >> 2;
+          rotateright[0]=k[3];
+          rotateright[1]=k[2];
+            
+        }
+        if (b[0]==1){
+          k[0]=a[7];
+          rotateright = a >> 1;
+          rotateright[0]=k[3];          
+        }
+
+     
+           
+  }
+}
+}
