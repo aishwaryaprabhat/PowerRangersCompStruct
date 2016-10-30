@@ -1,8 +1,0 @@
-INTSTYLE=pa
-INFILE=D:\Library\Desktop\50.002 Computation Structure\Mojo\EightBitALU\work\planAhead\EightBitAdder\EightBitAdder.runs\impl_1\mojo_top_0_routed.ncd
-OUTFILE=D:\Library\Desktop\50.002 Computation Structure\Mojo\EightBitALU\work\planAhead\EightBitAdder\EightBitAdder.runs\impl_1\mojo_top_0.bit
-FAMILY=Spartan6
-PART=xc6slx9-2tqg144
-WORKINGDIR=D:\Library\Desktop\50.002 Computation Structure\Mojo\EightBitALU\work\planAhead\EightBitAdder\EightBitAdder.runs\impl_1
-LICENSE=WebPack
-USER_INFO=211247662_0_0_572

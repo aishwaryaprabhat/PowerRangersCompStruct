@@ -1,0 +1,13 @@
+.include "C:\Users\Lenovo\Documents\Term 4\CompStruct\50002\50002\nominal.jsim"
+.include "C:\Users\Lenovo\Documents\Term 4\CompStruct\50002\50002\lab1checkoff.jsim"
+
+.subckt F a b c z
+MPU1 1 a vdd vdd PENH sw=10 sl=1
+MPU2 1 b vdd vdd PENH sw=10 sl=1 
+MPU3 2 c 1 vdd PENH sw=10 sl=1
+MPU4 z 2 vdd vdd PENH sw=10 sl=1
+MPD1 2 c 0 0 NENH sw=10 sl=1
+MPD2 3 b 0 0 NENH sw=10 sl=1
+MPD3 2 a 3 0 NENH sw=10 sl=1
+MPD4 z 2 0 0 NENH sw=10 sl=1
+.ends

@@ -31,7 +31,7 @@ module adder8 (
     z = ~(|ss);
     
     //obtain v, true(1) when addition operation overflows
-    v = ( a[7] & xb7 & ~ss[7] ) | ( ~a[7] | ~xb7 | ss[7] );
+    v = ( a[7] & xb7 & ~ss[7] ) | ( ~a[7] & ~xb7 & ss[7] );
     
     //obtain n, true(1) when s is negative overall
     n = ss[7];
