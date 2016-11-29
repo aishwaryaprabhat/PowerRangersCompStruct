@@ -1,0 +1,170 @@
+
+.include beta.uasm
+        .include lab5checkoff.uasm
+
+
+        |int count_bull_cows(int a, int b) {
+        |int bulls; | number of bulls
+        |int cows; | number of cows
+        |int i, j, btemp, atry, btry, mask; |temp vars
+
+        count_bull_cows:
+        PUSH(LP)
+        PUSH(BP)
+        MOVE(SP,BP)
+        PUSH(R1) |a
+        PUSH(R2) |b
+        PUSH(R3) |the rest just push first
+        PUSH(R4) |bulls
+        PUSH(R5) |cowzzzzzzzzzzz
+        PUSH(R6) |counter i
+        PUSH(R7) |COUNTER J
+        PUSH(R8)
+        PUSH(R9)
+        PUSH(R10)
+
+
+
+        | Compute Bulls: check each of the four 4-bit digits in turn
+        |bulls = 0;
+        |mask = 0xF; | mask chooses which 4-bit digit we check
+
+        LD(BP,-12,R1)
+        LD(BP,-16,R2)
+        ADDC(R31,0xF,R3)
+        ADD(R31,R31,R4)
+        ADD(R31,R31,R5)
+
+
+
+        |for (i = 0; i < 4; i = i + 1) {
+
+        ADD(R31,R31,R6)
+        BR(TERMINATE_THE_BULL)
+
+        TERMINATE_THE_BULL:
+        CMPLTC(R6,4,R0)
+        BNE(R0, BULL_FOR_ALL_ALL_FOR_BULL)
+
+
+        | if the 4-bit digits match, we have a bull
+        |if ((a & mask) == (b & mask)) {
+        |bulls = bulls + 1;
+        | turn matching 4-bit digits to 0xF so we don't
+        | count them again when computing number of cows
+        |a = a | mask;
+        |b = b | mask;
+        |}
+        | shift mask to check next 4-bit digit
+        |mask = mask << 4;
+        |}
+
+        BULL_FOR_ALL_ALL_FOR_BULL:
+        ADDC(R6,1,R6)
+        AND(R1,R3,R7)
+        AND(R2,R3,R8)
+        CMPEQ(R7,R8,R0)
+        BNE(R0, IF_BULL_TERMINATE)
+
+        SHLC(R3,4,R3)
+        BR(TERMINATE_THE_BULL)
+
+        IF_BULL_TERMINATE:
+        ADDC(R4,1,R4)
+        OR(R1,R3,R1)
+        OR(R2,R3,R2)
+        SHLC(R3,4,R3)
+
+
+        | Compute Cows: check each non-0xF digit of A against all the
+
+
+        | non-0xF digits of B to see if we have a match
+        |cows = 0;
+        COWZWOWZ:
+        ADD(R31,R31,R6)
+        BR(TERMINATE_COWZ_FOR_I)
+
+        |for (i = 0; i < 4; i = i + 1) {
+        |atry = a & 0xF; | this is the next digit from A
+        |a = a >> 4; | next time around check the next digit
+        |if (atry != 0xF) { | if this digit wasn’t a bull
+        | check the A digit against each of the four B digits
+
+        COWZ_FOR_I:
+        ADDC(R6,1,R6)
+        ANDC(R1,0xF,R8)
+        SHRC(R1,4,R1)
+        CMPEQC(R8,0xF,R0)
+        BEQ(R0, TERMINATE_COWZ_IF_I)
+
+        BR(TERMINATE_COWZ_FOR_I)
+
+        TERMINATE_COWZ_IF_I:
+        ADD(R31,R2,R9)
+        ADDC(R31,0xF,R3)
+
+        BR(TERMINATE_COWZ_FOR_J)
+
+        |for (j = 0; j < 4; j = j + 1) {
+        |btry = btemp & 0xF; | this is the next digit from B
+        |btemp = btemp >> 4; | next time around check the next digit
+        |if (btry == atry) { | if the digits match, we've found a cow
+
+        COWZ_FOR_J:
+        ADDC(R7,1,R7)
+        ANDC(R9,0xF,R10)
+        SHRC(R9,4,R9)
+        CMPEQ(R8,R10,R0)
+        BNE(R0, TERMINATE_COWZ_IF_J)
+
+        SHLC(R3,4,R3)
+        BR(TERMINATE_COWZ_FOR_J)
+
+        |btemp = b; | make a copy of the B digits
+        |mask = 0xF; | mask chooses which 4-bit digit we check
+
+        |cows = cows + 1;
+        |b = b | mask; | remember that we matched this B digit
+        |break; | move on to next A digit
+
+        TERMINATE_COWZ_IF_J:
+        ADDC(R5,1,R5)
+        OR(R2,R3,R2)
+        BR(TERMINATE_COWZ_FOR_I)
+
+        TERMINATE_COWZ_FOR_J:
+        CMPLTC(R7,4,R0)
+        BNE(R0,COWZ_FOR_J)
+
+        | encode result and return to caller
+        |return (bulls << 4) + cows;
+        |mask = mask << 4;
+
+        TERMINATE_COWZ_FOR_I:
+        ADD(R31,R31,R7)
+        CMPLTC(R6,4,R0)
+        BNE(R0, COWZ_FOR_I)
+
+        SHLC(R4,4,R4)
+        ADD(R4,R5,R0)
+
+
+        POP(R10)
+        POP(R9)
+        POP(R8)
+        POP(R7)
+        POP(R6)
+        POP(R5)
+        POP(R4)
+        POP(R3)
+        POP(R2)
+        POP(R1)
+        MOVE(BP,SP)
+        POP(BP)
+        POP(LP)
+        RTN()
+
+        StackBase: LONG(.+4)
+        .= .+0x1000
+
