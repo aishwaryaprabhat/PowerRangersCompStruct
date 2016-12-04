@@ -1,0 +1,11 @@
+module helloworld_ROM (
+    input address[4],  // ROM address
+    output letter[8]   // ROM output
+  ) {
+ 
+  const TEXT = "\r\n!abcdefghijklmnopq"; // text is reversed to make 'H' address [0]
+ 
+  always {
+    letter = TEXT[address]; // address indexes 8 bit blocks of TEXT
+  }
+}

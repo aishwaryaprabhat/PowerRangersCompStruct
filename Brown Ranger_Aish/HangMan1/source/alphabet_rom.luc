@@ -1,0 +1,10 @@
+module alphabet_rom (
+    input clk,  // clock
+    input rst,  // reset
+    output out
+  ) {
+
+  always {
+    out = 0;
+  }
+}

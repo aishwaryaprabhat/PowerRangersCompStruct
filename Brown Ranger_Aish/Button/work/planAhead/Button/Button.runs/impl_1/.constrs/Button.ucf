@@ -1,0 +1,11 @@
+
+NET "clk" TNM_NET = clk;
+
+NET "button" LOC = P51;
+NET "button" IOSTANDARD = LVTTL;
+NET "button" PULLUP;
+
+
+
+
+
