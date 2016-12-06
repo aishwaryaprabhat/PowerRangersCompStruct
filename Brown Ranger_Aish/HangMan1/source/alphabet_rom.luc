@@ -1,10 +1,11 @@
 module alphabet_rom (
-    input clk,  // clock
-    input rst,  // reset
-    output out
+   input address[1],  // ROM address
+    output letter[1]   // ROM output
   ) {
-
+ 
+  const TEXT = "\r\n!abcdefghijklmnopq"; // text is reversed to make 'H' address [0]
+ 
   always {
-    out = 0;
+    letter = TEXT[address]; // address indexes 8 bit blocks of TEXT
   }
 }

@@ -34,8 +34,8 @@ NGDBUILD Design Results Summary:
   Number of warnings:   0
 
 Writing NGD file "mojo_top_0.ngd" ...
-Total REAL time to NGDBUILD completion:  6 sec
-Total CPU time to NGDBUILD completion:   3 sec
+Total REAL time to NGDBUILD completion:  8 sec
+Total CPU time to NGDBUILD completion:   4 sec
 
 Writing NGDBUILD log file "mojo_top_0.bld"...
 
@@ -67,27 +67,27 @@ Updating timing models...
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 3 secs 
-Total CPU  time at the beginning of Placer: 3 secs 
+Total REAL time at the beginning of Placer: 4 secs 
+Total CPU  time at the beginning of Placer: 4 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:201092ee) REAL time: 3 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:201092ee) REAL time: 4 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:201092ee) REAL time: 3 secs 
+Phase 2.7  Design Feasibility Check (Checksum:201092ee) REAL time: 4 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:201092ee) REAL time: 3 secs 
+Phase 3.31  Local Placement Optimization (Checksum:201092ee) REAL time: 4 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:201092ee) REAL time: 3 secs 
+(Checksum:201092ee) REAL time: 4 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:201092ee) REAL time: 3 secs 
+Phase 5.36  Local Placement Optimization (Checksum:201092ee) REAL time: 4 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:201092ee) REAL time: 3 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:201092ee) REAL time: 4 secs 
 
 Phase 7.3  Local Placement Optimization
 Phase 7.3  Local Placement Optimization (Checksum:201092ee) REAL time: 4 secs 
@@ -157,8 +157,8 @@ Specific Feature Utilization:
 Average Fanout of Non-Clock Nets:                0.89
 
 Peak Memory Usage:  370 MB
-Total REAL time to MAP completion:  4 secs 
-Total CPU time to MAP completion (all processors):   4 secs 
+Total REAL time to MAP completion:  5 secs 
+Total CPU time to MAP completion (all processors):   5 secs 
 
 Mapping completed.
 See MAP report file "mojo_top_0.mrp" for details.
@@ -244,29 +244,29 @@ WARNING:Par:288 - The signal cclk_IBUF has no load.  PAR will not attempt to rou
 Starting Router
 
 
-Phase  1  : 8 unrouted;      REAL time: 3 secs 
+Phase  1  : 8 unrouted;      REAL time: 4 secs 
 
-Phase  2  : 8 unrouted;      REAL time: 3 secs 
+Phase  2  : 8 unrouted;      REAL time: 4 secs 
 
-Phase  3  : 0 unrouted;      REAL time: 3 secs 
+Phase  3  : 0 unrouted;      REAL time: 4 secs 
 
-Phase  4  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
+Phase  4  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
 
 Updating file: mojo_top_0_routed.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
+Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
 
-Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
+Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
 
-Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
+Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
 
-Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
+Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
 
-Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
+Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
 
-Phase 10  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 secs 
-Total REAL time to Router completion: 3 secs 
-Total CPU time to Router completion: 3 secs 
+Phase 10  : 0 unrouted; (Par is working to improve performance)     REAL time: 4 secs 
+Total REAL time to Router completion: 4 secs 
+Total CPU time to Router completion: 4 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -287,8 +287,8 @@ All signals are completely routed.
 
 WARNING:Par:283 - There are 8 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 3 secs 
-Total CPU time to PAR completion: 3 secs 
+Total REAL time to PAR completion: 4 secs 
+Total CPU time to PAR completion: 4 secs 
 
 Peak Memory Usage:  336 MB
 
@@ -312,13 +312,13 @@ Loading device for application Rf_Device from file '6slx9.nph' in environment
 C:\Xilinx\14.7\ISE_DS\ISE\.
    "mojo_top_0" is an NCD, version 3.2, device xc6slx9, package tqg144, speed -2
 
-Analysis completed Sun Dec 04 13:42:22 2016
+Analysis completed Sun Dec 04 16:30:15 2016
 --------------------------------------------------------------------------------
 
 Generating Report ...
 
 Number of warnings: 0
-Total time: 2 secs 
+Total time: 3 secs 
 
 *** Running xdl
     with args -secure -ncd2xdl -nopips "mojo_top_0_routed.ncd" "mojo_top_0_routed.xdl"

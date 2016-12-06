@@ -59,13 +59,13 @@ module greeter_3 (
   end
   
   always @(posedge clk) begin
-    M_count_q <= M_count_d;
-    
     if (rst == 1'b1) begin
       M_state_q <= 1'h0;
     end else begin
       M_state_q <= M_state_d;
     end
+    
+    M_count_q <= M_count_d;
   end
   
 endmodule

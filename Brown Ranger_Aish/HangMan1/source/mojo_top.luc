@@ -10,7 +10,17 @@ module mojo_top (
     output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
     input avr_tx,           // AVR TX (FPGA RX)
     output avr_rx,          // AVR RX (FPGA TX)
-    input avr_rx_busy       // AVR RX buffer full
+    input avr_rx_busy,       // AVR RX buffer full
+        input button51,
+        input button41,
+        input button35,
+        input button33,
+        input button30,
+        input button27,
+        input button24,
+        input button22
+        
+
   ) {
   
   sig rst;                  // reset signal
@@ -19,15 +29,41 @@ module mojo_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    .rst(rst){
+    avr_interface avr;
+    greeter greeter;
+     }
+    
   }
   
   always {
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
     
+    matrix_number = 0;    
+    case (matrix_number){
+      matrix_number
+      }
+ 
+    // connect inputs of avr
+    avr.cclk = cclk;
+    avr.spi_ss = spi_ss;
+    avr.spi_mosi = spi_mosi;
+    avr.spi_sck = spi_sck;
+    avr.rx = avr_tx;
+    greeter.new_rx = avr.new_rx_data;
+    greeter.rx_data = avr.rx_data;
+    avr.new_tx_data = greeter.new_tx;
+    avr.tx_data = greeter.tx_data;
+    greeter.tx_busy = avr.tx_busy;
+    avr.channel = hf; // ADC is unused so disable
+    avr.tx_block = avr_rx_busy; // block TX when AVR is busy
+ 
+    // connect outputs of avr
+    spi_miso = avr.spi_miso;
+    spi_channel = avr.spi_channel;
+    avr_rx = avr.tx;
+ 
     led = 8h00;             // turn LEDs off
-    spi_miso = bz;          // not using SPI
-    spi_channel = bzzzz;    // not using flags
-    avr_rx = bz;            // not using serial port
   }
 }
