@@ -21,7 +21,7 @@ module mojo_top (
         input tHREE,
         input tWO,
         input oNE,
-        
+
         //Player 2 inputs
         input eight2,
         input seven2,
@@ -103,14 +103,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0000};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0000};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0000};
-        5:
+        reg4.data = c{b0100,b0000};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0000};
+        reg5.data = c{b0101,b0000};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0000};
 
 
         }
@@ -132,14 +132,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0001};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0001};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0001};
-        5:
+        reg4.data = c{b0100,b0001};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0001};
+        reg5.data = c{b0101,b0001};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0001};
 
         }
         }
@@ -158,14 +158,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0010};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0010};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0010};
-        5:
+        reg4.data = c{b0100,b0010};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0010};
+        reg5.data = c{b0101,b0010};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0010};
 
         }}
         if(eIGHT==1 && oNE==1){
@@ -183,14 +183,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0011};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0011};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0011};
-        5:
+        reg4.data = c{b0100,b0011};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0011};
+        reg5.data = c{b0101,b0011};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0011};
 
         }}
 
@@ -209,14 +209,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0100};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0100};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0100};
-        5:
+        reg4.data = c{b0100,b0100};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0100};
+        reg5.data = c{b0101,b0100};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0100};
 
         }}
         if(sEVEN==1 && tHREE==1){
@@ -235,14 +235,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0101};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0101};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0101};
-        5:
+        reg4.data = c{b0100,b0101};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0101};
+        reg5.data = c{b0101,b0101};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0101};
 
         }}
         if(sEVEN==1 && tWO==1){
@@ -260,14 +260,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0110};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0110};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0110};
-        5:
+        reg4.data = c{b0100,b0110};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0110};
+        reg5.data = c{b0101,b0110};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0110};
         }}
         if(sEVEN==1 && oNE==1){
         //d
@@ -284,14 +284,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b0111};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b0111};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b0111};
-        5:
+        reg4.data = c{b0100,b0111};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b0111};
+        reg5.data = c{b0101,b0111};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b0111};
 
 
         }}
@@ -311,14 +311,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1000};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1000};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1000};
-        5:
+        reg4.data = c{b0100,b1000};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1000};
+        reg5.data = c{b0101,b1000};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1000};
 
         }}
         if(sIX==1 && tHREE==1){
@@ -336,14 +336,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1001};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1001};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1001};
-        5:
+        reg4.data = c{b0100,b1001};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1001};
+        reg5.data = c{b0101,b1001};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1001};
 
         }}
         if(sIX==1 && tWO==1){
@@ -361,14 +361,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1010};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1010};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1010};
-        5:
+        reg4.data = c{b0100,b1010};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1010};
+        reg5.data = c{b0101,b1010};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1010};
 
         }}
 
@@ -387,14 +387,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1011};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1011};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1011};
-        5:
+        reg4.data = c{b0100,b1011};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1011};
+        reg5.data = c{b0101,b1011};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1011};
 
         }}
 
@@ -413,14 +413,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1100};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1100};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1100};
-        5:
+        reg4.data = c{b0100,b1100};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1100};
+        reg5.data = c{b0101,b1100};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1100};
 
         }}
         if(fIVE==1 && tHREE==1){
@@ -438,14 +438,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1101};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1101};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1101};
-        5:
+        reg4.data = c{b0100,b1101};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1101};
+        reg5.data = c{b0101,b1101};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1101};
 
         }}
 
@@ -464,14 +464,14 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1110};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1110};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1110};
-        5:
+        reg4.data = c{b0100,b1110};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1110};
+        reg5.data = c{b0101,b1110};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1110};
 
         }}
         if(fIVE==1 && oNE==1){
@@ -489,30 +489,31 @@ module mojo_top (
         reg2.en = 1;
         reg2.data = c{b0011,b1111};
         3:
-        reg3.en = 1;
-        reg3.data = c{b0100,b1111};
-        4:
         reg4.en = 1;
-        reg4.data = c{b0101,b1111};
-        5:
+        reg4.data = c{b0100,b1111};
+        4:
         reg5.en = 1;
-        reg5.data = c{b0110,b1111};
+        reg5.data = c{b0101,b1111};
+        5:
+        reg6.en = 1;
+        reg6.data = c{b0110,b1111};
         }}
 
         //Inputs from player 2
         if(eight2==1 && four2==1){
         //a
-        reg6.en = 1;
-        reg6.data = 8b0001;
-        if (reg6.out[3:0] == reg1.out[3:0]){
+        reg7.en = 1;
+        reg7.data = 8b0000;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
         //display position on seven segment          
         }
         else{
-        if (reg6.out[3:0] == reg2.out[3:0]){
+        if (reg7.out[3:0] == reg2.out[3:0]){
         //display position on seven segment          
         }
         else{
-        if (reg6.out[3:0] == reg3.out[3:0]){
+        if (reg7.out[3:0] == reg3.out[3:0]){
         //display position on seven segment          
         }
         else{
@@ -523,48 +524,333 @@ module mojo_top (
         }
         if(eight2==1 && three2==1){
         //e
+        reg7.en = 1;
+        reg7.data = 8b0001;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(eight2==1 && two2==1){
         //i
+        reg7.en = 1;
+        reg7.data = 8b0010;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(eight2==1 && one2==1){
         //o
+        reg7.en = 1;
+        reg7.data = 8b0011;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(seven2==1 && four2==1){
         //u
+        reg7.en = 1;
+        reg7.data = 8b0100;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(seven2==1 && three2==1){
         //b
+        reg7.en = 1;
+        reg7.data = 8b0101;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(seven2==1 && two2==1){
         //c
+        reg7.en = 1;
+        reg7.data = 8b0110;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(seven2==1 && one2==1){
         //d
+        reg7.en = 1;
+        reg7.data = 8b0111;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(six2==1 && four2==1){
         //f
+        reg7.en = 1;
+        reg7.data = 8b1000;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(six2==1 && three2==1){
         //g
+        reg7.en = 1;
+        reg7.data = 8b1001;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(six2==1 && two2==1){
         //h
+        reg7.en = 1;
+        reg7.data = 8b1010;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(six2==1 && one2==1){
         //m
+        reg7.en = 1;
+        reg7.data = 8b1011;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(five2==1 && four2==1){
         //n
+        reg7.en = 1;
+        reg7.data = 8b1100;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(five2==1 && three2==1){
         //r
+        reg7.en = 1;
+        reg7.data = 8b1101;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(five2==1 && two2==1){
         //s
+        reg7.en = 1;
+        reg7.data = 8b1110;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
         if(five2==1 && one2==1){
         //t
+        reg7.en = 1;
+        reg7.data = 8b1111;
+        reg7.en = 0;
+        if (reg7.out[3:0] == reg1.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg2.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        if (reg7.out[3:0] == reg3.out[3:0]){
+        //display position on seven segment          
+        }
+        else{
+        //next state of hangman
+        }
+        }
+        }
         }
 
 
