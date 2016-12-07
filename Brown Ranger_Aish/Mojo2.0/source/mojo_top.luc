@@ -1,188 +1,544 @@
 module mojo_top (
-    input clk,              // 50MHz clock
-    input rst_n,            // reset button (active low)
-    //output led [8],         // 8 user controllable LEDs
-    input cclk,             // configuration clock, AVR ready when high
-    output spi_miso,        // AVR SPI MISO
-    input spi_ss,           // AVR SPI Slave Select
-    input spi_mosi,         // AVR SPI MOSI
-    input spi_sck,          // AVR SPI Clock
-    output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
-    input avr_tx,           // AVR TX (FPGA RX)
-    output avr_rx,          // AVR RX (FPGA TX)
-    input avr_rx_busy,       // AVR RX buffer full
-    
-    //Player 1 inputs
-    input eIGHT,
-    input sEVEN,
-    input sIX,
-    input fIVE,
-    input fOUR,
-    input tHREE,
-    input tWO,
-    input oNE
-  ) {
-  
-  sig rst;                  // reset signal
-  
-  .clk(clk) {
-    // The reset conditioner is used to synchronize the reset signal to the FPGA
-    // clock. This ensures the entire FPGA comes out of reset at the same time.
-    reset_conditioner reset_cond;
-    
-    .rst(rst){
-    dff counter[5];
-    avr_interface avr;
-    register reg1(#WIDTH(8));
-    register reg2(#WIDTH(8));
-    register reg3(#WIDTH(8));
-    register reg4(#WIDTH(8));
-    register reg5(#WIDTH(8));
-    register reg6(#WIDTH(8));
-    register reg7(#WIDTH(8));
-    register reg8(#WIDTH(8));
-    //reg_interface register;
-      }
-  }
-  
-  always {
-    reset_cond.in = ~rst_n; // input raw inverted reset signal
-    rst = reset_cond.out;   // conditioned reset
-    
-    // connect inputs of avr
-    avr.cclk = cclk;
-    avr.spi_ss = spi_ss;
-    avr.spi_mosi = spi_mosi;
-    avr.spi_sck = spi_sck;
-    avr.rx = avr_tx;
-    avr.channel = hf;           // ADC is unused so disable
-    avr.tx_block = avr_rx_busy; // block TX when AVR is busy
-    avr.tx_data = bz;
-    avr.new_tx_data = bz;
-     
-    // connect outputs of avr
-    spi_miso = avr.spi_miso;
-    spi_channel = avr.spi_channel;
-    avr_rx = avr.tx;
-    
-    //initialize registers en and data
-    reg1.en = 0;
-    reg1.data = 0;
-    reg2.en = 0;
-    reg2.data = 0;      
-    reg3.en = 0;
-    reg3.data = 0; 
-    reg4.en = 0;
-    reg4.data = 0; 
-    reg5.en = 0;
-    reg5.data = 0; 
-    reg6.en = 0;
-    reg6.data = 0; 
-    reg7.en = 0;
-    reg7.data = 0; 
-    reg8.en = 0;
-    reg8.data = 0; 
-     
-    
-     
-    //Converting keypad analog input to alphabet
-    if(eIGHT==1 && fOUR==1){
-    //a
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which 
-      case (counter.q){
-        0:
-          reg1.en = 1;
-          reg1.data = c{7b0,1};
-        1:
-          reg2.en = 1;          
+        input clk,              // 50MHz clock
+        input rst_n,            // reset button (active low)
+//output led [8],         // 8 user controllable LEDs
+        input cclk,             // configuration clock, AVR ready when high
+        output spi_miso,        // AVR SPI MISO
+        input spi_ss,           // AVR SPI Slave Select
+        input spi_mosi,         // AVR SPI MOSI
+        input spi_sck,          // AVR SPI Clock
+        output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
+        input avr_tx,           // AVR TX (FPGA RX)
+        output avr_rx,          // AVR RX (FPGA TX)
+        input avr_rx_busy,       // AVR RX buffer full
+
+        //Player 1 inputs
+        input eIGHT,
+        input sEVEN,
+        input sIX,
+        input fIVE,
+        input fOUR,
+        input tHREE,
+        input tWO,
+        input oNE,
+        input eight2,
+        input seven2,
+        input six2,
+        input five2,
+        input four2,
+        input three2,
+        input two2,
+        input one2
+        ) {
+
+        sig rst;                  // reset signal
+
+        .clk(clk) {
+        // The reset conditione2r is used to synchronize the reset signal to the FPGA
+        // clock. This ensures the entire FPGA comes out of reset at the same time.
+        reset_conditioner reset_cond;
+
+        .rst(rst){
+        dff counter[5];
+        avr_interface avr;
+        register reg1(#WIDTH(8));
+        register reg2(#WIDTH(8));
+        register reg3(#WIDTH(8));
+        register reg4(#WIDTH(8));
+        register reg5(#WIDTH(8));
+        register reg6(#WIDTH(8));
+        register reg7(#WIDTH(8));
+        register reg8(#WIDTH(8));
+        //reg_interface register;
         }
-      
-      }
-    
-    if(eIGHT==1 && tHREE==1){
-    //e
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(eIGHT==1 && tWO==1){
-    //i
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(eIGHT==1 && oNE==1){
-    //o
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    
-    if(sEVEN==1 && fOUR==1){
-    //u
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(sEVEN==1 && tHREE==1){
-    //b
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(sEVEN==1 && tWO==1){
-    //c
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(sEVEN==1 && oNE==1){
-    //d
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    
-    if(sIX==1 && fOUR==1){
-    //f
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(sIX==1 && tHREE==1){
-    //g
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(sIX==1 && tWO==1){
-    //h
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    
-    if(sIX==1 && oNE==1){
-    //m
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    
-    if(fIVE==1 && fOUR==1){
-    //n
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(fIVE==1 && tHREE==1){
-    //r
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    
-    if(fIVE==1 && tWO==1){
-    //s
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }
-    if(fIVE==1 && oNE==1){
-    //t
-      counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
-                                 //also corresponds to adress of register in which
-      }  
+        }
+
+        always {
+        reset_cond.in = ~rst_n; // input raw inverted reset signal
+        rst = reset_cond.out;   // conditione2d reset
+
+        // connect inputs of avr
+        avr.cclk = cclk;
+        avr.spi_ss = spi_ss;
+        avr.spi_mosi = spi_mosi;
+        avr.spi_sck = spi_sck;
+        avr.rx = avr_tx;
+        avr.channel = hf;           // ADC is unused so disable
+        avr.tx_block = avr_rx_busy; // block TX when AVR is busy
+        avr.tx_data = bz;
+        avr.new_tx_data = bz;
+
+        // connect outputs of avr
+        spi_miso = avr.spi_miso;
+        spi_channel = avr.spi_channel;
+        avr_rx = avr.tx;
+
+        //initialize registers en and data
+        reg1.en = 0;
+        reg1.data = 0;
+        reg2.en = 0;
+        reg2.data = 0;
+        reg3.en = 0;
+        reg3.data = 0;
+        reg4.en = 0;
+        reg4.data = 0;
+        reg5.en = 0;
+        reg5.data = 0;
+        reg6.en = 0;
+        reg6.data = 0;
+        reg7.en = 0;
+        reg7.data = 0;
+        reg8.en = 0;
+        reg8.data = 0;
+
+
+
+        //Converting keypad analog input to alphabet
+        if(eIGHT==1 && fOUR==1){
+        //a
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{7b0,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{7b0,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{7b0,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{7b0,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{7b0,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{7b0,1};
+        }
+
+        }
+
+        if(eIGHT==1 && tHREE==1){
+        //e
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{6b0,1,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{6b0,1,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{6b0,1,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{6b0,1,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{6b0,1,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{6b0,1,0};
+        }
+        }
+        if(eIGHT==1 && tWO==1){
+        //i
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{6b0,1,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{6b0,1,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{6b0,1,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{6b0,1,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{6b0,1,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{6b0,1,1};
+        }}
+        if(eIGHT==1 && oNE==1){
+        //o
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{5b0,1,0,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,0,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,0,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{5b0,1,0,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{5b0,1,0,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{5b0,1,0,0};
+        }}
+
+        if(sEVEN==1 && fOUR==1){
+        //u
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{5b0,1,0,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,0,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,0,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{5b0,1,0,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{5b0,1,0,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{5b0,1,0,1};
+        }}
+        if(sEVEN==1 && tHREE==1){
+        //b
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{5b0,1,1,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,1,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,1,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{5b0,1,1,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{5b0,1,1,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{5b0,1,1,0};
+        }}
+        if(sEVEN==1 && tWO==1){
+        //c
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{5b0,1,1,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,1,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{5b0,1,1,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{5b0,1,1,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{5b0,1,1,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{5b0,1,1,1};
+        }}
+        if(sEVEN==1 && oNE==1){
+        //d
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,0,0,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,0,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,0,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,0,0,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,0,0,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,0,0,0};
+        }}
+
+        if(sIX==1 && fOUR==1){
+        //f
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,0,0,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,0,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,0,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,0,0,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,0,0,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,0,0,1};
+        }}
+        if(sIX==1 && tHREE==1){
+        //g
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,0,1,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,1,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,1,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,0,1,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,0,1,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,0,1,0};
+        }}
+        if(sIX==1 && tWO==1){
+        //h
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,0,1,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,1,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,0,1,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,0,1,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,0,1,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,0,1,1};
+        }}
+
+        if(sIX==1 && oNE==1){
+        //m
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,1,0,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,0,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,0,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,1,0,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,1,0,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,1,0,0};
+        }}
+
+        if(fIVE==1 && fOUR==1){
+        //n
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,1,0,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,0,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,0,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,1,0,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,1,0,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,1,0,1};
+        }}
+        if(fIVE==1 && tHREE==1){
+        //r
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,1,1,0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,1,0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,1,0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,1,1,0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,1,1,0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,1,1,0};
+        }}
+
+        if(fIVE==1 && tWO==1){
+        //s
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{4b0,1,1,1,1};
+        1:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,1,1};
+        2:
+        reg2.en = 1;
+        reg2.data = c{4b0,1,1,1,1};
+        3:
+        reg3.en = 1;
+        reg3.data = c{4b0,1,1,1,1};
+        4:
+        reg4.en = 1;
+        reg4.data = c{4b0,1,1,1,1};
+        5:
+        reg5.en = 1;
+        reg5.data = c{4b0,1,1,1,1};
+        }}
+        if(fIVE==1 && oNE==1){
+        //t
+        counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
+        //also corresponds to adress of register in which
+        case (counter.q){
+        0:
+        reg1.en = 1;
+        reg1.data = c{3b0,1,4b0};
+        1:
+        reg2.en = 1;
+        reg2.data = c{3b0,1,4b0};
+        2:
+        reg2.en = 1;
+        reg2.data = c{3b0,1,4b0};
+        3:
+        reg3.en = 1;
+        reg3.data = c{3b0,1,4b0};
+        4:
+        reg4.en = 1;
+        reg4.data = c{3b0,1,4b0};
+        5:
+        reg5.en = 1;
+        reg5.data = c{3b0,1,4b0};
+        }}
+
+        //Inputs from player 2
+        if(eight2==1 && four2==1){
+        //a
         
-        
-        
-    
-  }
-}
+        }
+        if(eight2==1 && three2==1){
+        //e
+        }
+        if(eight2==1 && two2==1){
+        //i
+        }
+        if(eight2==1 && one2==1){
+        //o
+        }
+        if(seven2==1 && four2==1){
+        //u
+        }
+        if(seven2==1 && three2==1){
+        //b
+        }
+        if(seven2==1 && two2==1){
+        //c
+        }
+        if(seven2==1 && one2==1){
+        //d
+        }
+        if(six2==1 && four2==1){
+        //f
+        }
+        if(six2==1 && three2==1){
+        //g
+        }
+        if(six2==1 && two2==1){
+        //h
+        }
+        if(six2==1 && one2==1){
+        //m
+        }
+        if(five2==1 && four2==1){
+        //n
+        }
+        if(five2==1 && three2==1){
+        //r
+        }
+        if(five2==1 && two2==1){
+        //s
+        }
+        if(five2==1 && one2==1){
+        //t
+        }
+
+
+        }
+        }
