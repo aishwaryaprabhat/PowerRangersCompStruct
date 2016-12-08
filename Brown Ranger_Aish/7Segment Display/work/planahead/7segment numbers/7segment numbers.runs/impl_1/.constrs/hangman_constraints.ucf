@@ -1,0 +1,55 @@
+NET "clk" TNM_NET = "clk";
+
+
+NET "keypadp1[0]" LOC = P15;
+NET "keypadp1[0]" IOSTANDARD = LVTTL;
+NET "keypadp1[1]" LOC = P17;
+NET "keypadp1[1]" IOSTANDARD = LVTTL;
+NET "keypadp1[2]" LOC = P22;
+NET "keypadp1[2]" IOSTANDARD = LVTTL;
+NET "keypadp1[3]" LOC = P24;
+NET "keypadp1[3]" IOSTANDARD = LVTTL;
+NET "keypadp1[4]" LOC = P6;
+NET "keypadp1[4]" IOSTANDARD = LVTTL;
+NET "keypadp1[5]" LOC = P8;
+NET "keypadp1[5]" IOSTANDARD = LVTTL;
+NET "keypadp1[6]" LOC = P10;
+NET "keypadp1[6]" IOSTANDARD = LVTTL;
+NET "keypadp1[7]" LOC = P12;
+NET "keypadp1[7]" IOSTANDARD = LVTTL;
+
+NET "displayp1[0]" LOC = P29;
+NET "displayp1[0]" IOSTANDARD = LVTTL;
+NET "displayp1[1]" LOC = P50;
+NET "displayp1[1]" IOSTANDARD = LVTTL;
+NET "displayp1[2]" LOC = P35;
+NET "displayp1[2]" IOSTANDARD = LVTTL;
+NET "displayp1[3]" LOC = P30;
+NET "displayp1[3]" IOSTANDARD = LVTTL;
+NET "displayp1[4]" LOC = P27;
+NET "displayp1[4]" IOSTANDARD = LVTTL;
+NET "displayp1[5]" LOC = P32;
+NET "displayp1[5]" IOSTANDARD = LVTTL;
+NET "displayp1[6]" LOC = P41;
+NET "displayp1[6]" IOSTANDARD = LVTTL;
+
+NET "displayselp1[0]" LOC = P26;
+NET "displayselp1[0]" IOSTANDARD = LVTTL;
+NET "displayselp1[1]" LOC = P34;
+NET "displayselp1[1]" IOSTANDARD = LVTTL;
+NET "displayselp1[2]" LOC = P40;
+NET "displayselp1[2]" IOSTANDARD = LVTTL;
+NET "displayselp1[3]" LOC = P51;
+NET "displayselp1[3]" IOSTANDARD = LVTTL;
+
+
+NET "led[0]" PULLDOWN;
+NET "led[1]" PULLDOWN;
+NET "led[2]" PULLDOWN;
+NET "led[3]" PULLDOWN;
+NET "led[4]" PULDOWN;
+NET "led[5]" PULLDOWN;
+NET "led[6]" PULLDOWN;
+NET "led[7]" PULLDOWN;
+
+
