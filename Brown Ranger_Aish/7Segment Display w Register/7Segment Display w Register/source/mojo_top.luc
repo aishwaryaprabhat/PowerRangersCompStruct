@@ -1,0 +1,146 @@
+module mojo_top (
+    input clk,              // 50MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input cclk,             // configuration clock, AVR ready when high
+    output spi_miso,        // AVR SPI MISO
+    input spi_ss,           // AVR SPI Slave Select
+    input spi_mosi,         // AVR SPI MOSI
+    input spi_sck,          // AVR SPI Clock
+    output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
+    input avr_tx,           // AVR TX (FPGA RX)
+    output avr_rx,          // AVR RX (FPGA TX)
+    input avr_rx_busy,      // AVR RX buffer full
+    
+    output displayp1 [7],      // 7-segment LEDs on IO Shield
+    output displayselp1 [4],      // Digit select on IO Shield
+    
+    input keypadp1[8],
+    
+    output displayp2 [7],      // 7-segment LEDs on IO Shield
+    output displayselp2 [4],    // Digit select on IO Shield
+
+    input keypadp1in[4],     //row
+    output keypadp1out[4],    //coloumn
+    
+    input keypadp2in[4],     //row
+    output keypadp2out[4]    //coloumn
+    
+  ) {
+  
+  sig rst;                      // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+   
+    .rst(rst) {
+      multi_seven_seg p1;    //to display 4-digits seven segment p1
+      multi_seven_seg p2;    //to display 4-digits seven segment p2    
+        
+      keypad_reader keypad1;
+      keypad_reader keypad2;
+                     
+      dff regcounter[4];
+      
+      register reg1;           //p1 d1
+      register reg2;           //p1 d2
+      register reg3;           //p1 d3
+      register reg4;           //p1 d4
+      register reg5;           //p2 d1
+      register reg6;           //p2 d2
+      register reg7;           //p2 d3
+      register reg8;           //p2 d4
+    }
+  }
+     
+always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    keypad1.in = keypadp1in;
+    keypadp1out = keypad1.out;
+    
+    keypad2.in = keypadp2in;
+    keypadp2out = keypad2.out;
+        
+    //initialize registers en and data   
+    reg1.en = 0;        reg1.data = 8b1;
+    reg2.en = 0;        reg2.data = 8b1;
+    reg3.en = 0;        reg3.data = 8b1;
+    reg4.en = 0;        reg4.data = 8b1;
+    reg5.en = 1;        reg5.data = 8b10001000;
+    reg6.en = 0;        reg6.data = 8b10000100;
+    reg7.en = 0;        reg7.data = 8b1;
+    reg8.en = 0;        reg8.data = 8b1;                
+    
+    if (~(keypad1.key==8b0) && regcounter.q<4){  //p1 turn
+      //led = regcounter.q;  //debugging purpose
+      
+      case(regcounter.q){
+        0:  reg1.en = 1;
+            reg1.data = keypad1.key;      //set question d1
+            regcounter.d=1;
+        1:  if(!(reg1.out==keypad1.key)){
+              reg2.en = 1;
+              reg2.data = keypad1.key;      //set question d2
+            }
+          
+        2:  reg3.en = 1;
+            reg3.data = keypad1.key;      //set question d3
+          
+        3:  reg4.en = 1;
+            reg4.data = keypad1.key;      //set question d4
+      }
+    }
+    
+    
+    
+    if (~(keypad2.key==8b0) && regcounter.q>4){  //p2 turn
+      if(reg1.out==keypad2.key){          //d1 is correct
+        reg5.en = 1;
+        reg5.data = keypad2.key;
+        reg5.en = 0;  
+      }
+      
+      if(reg2.out==keypad2.key){          //d2 is correct
+        reg6.en = 1;
+        reg6.data = keypad2.key;
+        reg6.en = 0;  
+      }
+      
+      if(reg3.out==keypad2.key){          //d3 is correct
+        reg7.en = 1;
+        reg7.data = keypad2.key;
+        reg7.en = 0;     
+      }
+      
+      if(reg4.out==keypad2.key){          //d4 is correct
+        reg8.en = 1;
+        reg8.data = keypad2.key;
+        reg8.en = 0;  
+      }
+      else{                            //nothing is correct
+        regcounter.d = regcounter.q+1; //lose life
+      }
+    }    
+    
+    
+    p1.values = {reg1.out,reg2.out,reg3.out,reg4.out}; 
+     
+    displayp1 = ~p1.seg; // connect segments to the driver
+    displayselp1 = p1.sel; // connect digit select to the driver
+    
+    p2.values = {reg5.out,reg6.out,reg7.out,8b10001000};
+     
+    displayp2 = ~p2.seg; // connect segments to the driver
+    displayselp2 = p2.sel; // connect digit select to the driver
+    
+    led = 8h00;
+    
+    spi_miso = bz;          // not using SPI
+    spi_channel = bzzzz;    // not using flags
+    avr_rx = bz;            // not using serial port
+  }
+}

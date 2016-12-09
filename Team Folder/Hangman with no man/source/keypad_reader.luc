@@ -1,0 +1,26 @@
+module keypad_reader (
+    input clk,  // clock
+    input rst,  // reset
+    input in[4], //row
+    output out[4], //col
+    output key[8]
+  ) {
+  
+  .clk(clk), .rst(rst) {
+    counter keycount (#DIV(16), #SIZE(2), #TOP(3));
+  }
+  
+  decoder dec;                     
+
+  always {
+    dec.in = keycount.value;
+    out = dec.out;
+    
+    if (!(in==4b000)){
+      key = c{in,dec.out};
+    }
+    else{
+      key = 8b0;
+    }
+  }
+}

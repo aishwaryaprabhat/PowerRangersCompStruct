@@ -30,8 +30,11 @@ module mojo_top (
         input four2,
         input three2,
         input two2,
-        input one2
-        ) {
+        input one2,
+        
+        output displayp1 [7],      // 7-segment LEDs on IO Shield
+        output displayselp1 [4]      // Digit select on IO Shield
+        ){
 
         sig rst;                  // reset signal
 
@@ -39,6 +42,7 @@ module mojo_top (
         // The reset conditione2r is used to synchronize the reset signal to the FPGA
         // clock. This ensures the entire FPGA comes out of reset at the same time.
         reset_conditioner reset_cond;
+        
 
         .rst(rst){
         dff counter[5];
@@ -52,13 +56,21 @@ module mojo_top (
         register reg7(#WIDTH(8));
         register reg8(#WIDTH(8));
         //reg_interface register;
+      
+         multi_seven_seg seg;
         }
         }
 
         always {
         reset_cond.in = ~rst_n; // input raw inverted reset signal
         rst = reset_cond.out;   // conditione2d reset
-
+        
+    
+        seg.values = {8b10001000,8b10000100,8b10000010,8b01011111}; //replace with register 1 2 3 4
+         
+        displayp1 = ~seg.seg; // connect segments to the driver
+        displayselp1 = seg.sel; // connect digit select to the driver
+    
         // connect inputs of avr
         avr.cclk = cclk;
         avr.spi_ss = spi_ss;
@@ -88,8 +100,12 @@ module mojo_top (
 
 
         //Converting keypad analog input to alphabet
-        if(eIGHT==1 && fOUR==1){
+        if(eIGHT==0 && fOUR==0){
+        
         //a
+        seg.values= {8b10001000,8b10001000,8b10001000,8b10001000};
+      displayp1 = ~seg.seg; // connect segments to the driver
+        displayselp1 = seg.sel; // connect digit select to the driver
         counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
         //also corresponds to adress of register in which
         case (counter.q){
@@ -121,6 +137,10 @@ module mojo_top (
         //e
         counter.d = counter.q + 1; //increment counter to identify number of alphabets successfully entered
         //also corresponds to adress of register in which
+        seg.values = {8b10001001,8b10001001,8b10001001,8b10001001};
+      displayp1 = ~seg.seg; // connect segments to the driver
+        displayselp1 = seg.sel; // connect digit select to the driver
+      
         case (counter.q){
         0:
         reg1.en = 1;
@@ -502,6 +522,9 @@ module mojo_top (
         //Inputs from player 2
         if(eight2==1 && four2==1){
         //a
+        seg.values= {8b10001010,8b10001010,8b10001000,8b10001010};
+        displayp1 = ~seg.seg; // connect segments to the driver
+          displayselp1 = seg.sel; // connect digit select to the driver
         reg7.en = 1;
         reg7.data = 8b0000;
         reg7.en = 0;

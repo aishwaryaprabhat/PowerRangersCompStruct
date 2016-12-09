@@ -23,7 +23,17 @@ module mojo_top_0 (
     input fOUR,
     input tHREE,
     input tWO,
-    input oNE
+    input oNE,
+    input eight2,
+    input seven2,
+    input six2,
+    input five2,
+    input four2,
+    input three2,
+    input two2,
+    input one2,
+    output reg [6:0] displayp1,
+    output reg [3:0] displayselp1
   );
   
   
@@ -158,12 +168,25 @@ module mojo_top_0 (
     .data(M_reg8_data),
     .out(M_reg8_out)
   );
+  wire [7-1:0] M_seg_seg;
+  wire [4-1:0] M_seg_sel;
+  reg [32-1:0] M_seg_values;
+  multi_seven_seg_11 seg (
+    .clk(clk),
+    .rst(rst),
+    .values(M_seg_values),
+    .seg(M_seg_seg),
+    .sel(M_seg_sel)
+  );
   
   always @* begin
     M_counter_d = M_counter_q;
     
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
+    M_seg_values = 32'h8884825f;
+    displayp1 = ~M_seg_seg;
+    displayselp1 = M_seg_sel;
     M_avr_cclk = cclk;
     M_avr_spi_ss = spi_ss;
     M_avr_spi_mosi = spi_mosi;
@@ -177,472 +200,25 @@ module mojo_top_0 (
     spi_channel = M_avr_spi_channel;
     avr_rx = M_avr_tx;
     M_reg1_en = 1'h0;
-    M_reg1_data = 1'h0;
+    M_reg1_data = 8'h01;
     M_reg2_en = 1'h0;
-    M_reg2_data = 1'h0;
+    M_reg2_data = 8'h01;
     M_reg3_en = 1'h0;
-    M_reg3_data = 1'h0;
+    M_reg3_data = 8'h01;
     M_reg4_en = 1'h0;
-    M_reg4_data = 1'h0;
+    M_reg4_data = 8'h01;
     M_reg5_en = 1'h0;
-    M_reg5_data = 1'h0;
+    M_reg5_data = 8'h01;
     M_reg6_en = 1'h0;
-    M_reg6_data = 1'h0;
+    M_reg6_data = 8'h01;
     M_reg7_en = 1'h0;
-    M_reg7_data = 1'h0;
+    M_reg7_data = 8'h01;
     M_reg8_en = 1'h0;
-    M_reg8_data = 1'h0;
-    if (eIGHT == 1'h1 && fOUR == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h01;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h01;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h01;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h01;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h01;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h01;
-        end
-      endcase
-    end
-    if (eIGHT == 1'h1 && tHREE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h02;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h02;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h02;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h02;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h02;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h02;
-        end
-      endcase
-    end
-    if (eIGHT == 1'h1 && tWO == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h03;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h03;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h03;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h03;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h03;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h03;
-        end
-      endcase
-    end
-    if (eIGHT == 1'h1 && oNE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h04;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h04;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h04;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h04;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h04;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h04;
-        end
-      endcase
-    end
-    if (sEVEN == 1'h1 && fOUR == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h05;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h05;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h05;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h05;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h05;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h05;
-        end
-      endcase
-    end
-    if (sEVEN == 1'h1 && tHREE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h06;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h06;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h06;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h06;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h06;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h06;
-        end
-      endcase
-    end
-    if (sEVEN == 1'h1 && tWO == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h07;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h07;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h07;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h07;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h07;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h07;
-        end
-      endcase
-    end
-    if (sEVEN == 1'h1 && oNE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h08;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h08;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h08;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h08;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h08;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h08;
-        end
-      endcase
-    end
-    if (sIX == 1'h1 && fOUR == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h09;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h09;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h09;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h09;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h09;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h09;
-        end
-      endcase
-    end
-    if (sIX == 1'h1 && tHREE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h0a;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0a;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0a;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h0a;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h0a;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h0a;
-        end
-      endcase
-    end
-    if (sIX == 1'h1 && tWO == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h0b;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0b;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0b;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h0b;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h0b;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h0b;
-        end
-      endcase
-    end
-    if (sIX == 1'h1 && oNE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h0c;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0c;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0c;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h0c;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h0c;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h0c;
-        end
-      endcase
-    end
-    if (fIVE == 1'h1 && fOUR == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h0d;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0d;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0d;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h0d;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h0d;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h0d;
-        end
-      endcase
-    end
-    if (fIVE == 1'h1 && tHREE == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h0e;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0e;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0e;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h0e;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h0e;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h0e;
-        end
-      endcase
-    end
-    if (fIVE == 1'h1 && tWO == 1'h1) begin
-      M_counter_d = M_counter_q + 1'h1;
-      
-      case (M_counter_q)
-        1'h0: begin
-          M_reg1_en = 1'h1;
-          M_reg1_data = 8'h0f;
-        end
-        1'h1: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0f;
-        end
-        2'h2: begin
-          M_reg2_en = 1'h1;
-          M_reg2_data = 8'h0f;
-        end
-        2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h0f;
-        end
-        3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h0f;
-        end
-        3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h0f;
-        end
-      endcase
-    end
-    if (fIVE == 1'h1 && oNE == 1'h1) begin
+    M_reg8_data = 8'h01;
+    if (eIGHT == 1'h0 && fOUR == 1'h0) begin
+      M_seg_values = 32'h88888888;
+      displayp1 = ~M_seg_seg;
+      displayselp1 = M_seg_sel;
       M_counter_d = M_counter_q + 1'h1;
       
       case (M_counter_q)
@@ -652,25 +228,769 @@ module mojo_top_0 (
         end
         1'h1: begin
           M_reg2_en = 1'h1;
-          M_reg2_data = 8'h10;
+          M_reg2_data = 8'h20;
         end
         2'h2: begin
           M_reg2_en = 1'h1;
-          M_reg2_data = 8'h10;
+          M_reg2_data = 8'h30;
         end
         2'h3: begin
-          M_reg3_en = 1'h1;
-          M_reg3_data = 8'h10;
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h40;
         end
         3'h4: begin
-          M_reg4_en = 1'h1;
-          M_reg4_data = 8'h10;
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h50;
         end
         3'h5: begin
-          M_reg5_en = 1'h1;
-          M_reg5_data = 8'h10;
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h60;
         end
       endcase
+    end
+    if (eIGHT == 1'h1 && tHREE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      M_seg_values = 32'h89898989;
+      displayp1 = ~M_seg_seg;
+      displayselp1 = M_seg_sel;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h11;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h21;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h31;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h41;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h51;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h61;
+        end
+      endcase
+    end
+    if (eIGHT == 1'h1 && tWO == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h12;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h22;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h32;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h42;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h52;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h62;
+        end
+      endcase
+    end
+    if (eIGHT == 1'h1 && oNE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h13;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h23;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h33;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h43;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h53;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h63;
+        end
+      endcase
+    end
+    if (sEVEN == 1'h1 && fOUR == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h14;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h24;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h34;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h44;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h54;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h64;
+        end
+      endcase
+    end
+    if (sEVEN == 1'h1 && tHREE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h15;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h25;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h35;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h45;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h55;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h65;
+        end
+      endcase
+    end
+    if (sEVEN == 1'h1 && tWO == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h16;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h26;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h36;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h46;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h56;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h66;
+        end
+      endcase
+    end
+    if (sEVEN == 1'h1 && oNE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h17;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h27;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h37;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h47;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h57;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h67;
+        end
+      endcase
+    end
+    if (sIX == 1'h1 && fOUR == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h18;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h28;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h38;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h48;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h58;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h68;
+        end
+      endcase
+    end
+    if (sIX == 1'h1 && tHREE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h19;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h29;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h39;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h49;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h59;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h69;
+        end
+      endcase
+    end
+    if (sIX == 1'h1 && tWO == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h1a;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h2a;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h3a;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h4a;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h5a;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h6a;
+        end
+      endcase
+    end
+    if (sIX == 1'h1 && oNE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h1b;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h2b;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h3b;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h4b;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h5b;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h6b;
+        end
+      endcase
+    end
+    if (fIVE == 1'h1 && fOUR == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h1c;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h2c;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h3c;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h4c;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h5c;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h6c;
+        end
+      endcase
+    end
+    if (fIVE == 1'h1 && tHREE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h1d;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h2d;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h3d;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h4d;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h5d;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h6d;
+        end
+      endcase
+    end
+    if (fIVE == 1'h1 && tWO == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h1e;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h2e;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h3e;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h4e;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h5e;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h6e;
+        end
+      endcase
+    end
+    if (fIVE == 1'h1 && oNE == 1'h1) begin
+      M_counter_d = M_counter_q + 1'h1;
+      
+      case (M_counter_q)
+        1'h0: begin
+          M_reg1_en = 1'h1;
+          M_reg1_data = 8'h1f;
+        end
+        1'h1: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h2f;
+        end
+        2'h2: begin
+          M_reg2_en = 1'h1;
+          M_reg2_data = 8'h3f;
+        end
+        2'h3: begin
+          M_reg4_en = 1'h1;
+          M_reg4_data = 8'h4f;
+        end
+        3'h4: begin
+          M_reg5_en = 1'h1;
+          M_reg5_data = 8'h5f;
+        end
+        3'h5: begin
+          M_reg6_en = 1'h1;
+          M_reg6_data = 8'h6f;
+        end
+      endcase
+    end
+    if (eight2 == 1'h1 && four2 == 1'h1) begin
+      M_seg_values = 32'h8a8a888a;
+      displayp1 = ~M_seg_seg;
+      displayselp1 = M_seg_sel;
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h00;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (eight2 == 1'h1 && three2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h01;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (eight2 == 1'h1 && two2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h02;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (eight2 == 1'h1 && one2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h03;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (seven2 == 1'h1 && four2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h04;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (seven2 == 1'h1 && three2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h05;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (seven2 == 1'h1 && two2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h06;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (seven2 == 1'h1 && one2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h07;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (six2 == 1'h1 && four2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h08;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (six2 == 1'h1 && three2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h09;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (six2 == 1'h1 && two2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h0a;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (six2 == 1'h1 && one2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h0b;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (five2 == 1'h1 && four2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h0c;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (five2 == 1'h1 && three2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h0d;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (five2 == 1'h1 && two2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h0e;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
+    end
+    if (five2 == 1'h1 && one2 == 1'h1) begin
+      M_reg7_en = 1'h1;
+      M_reg7_data = 8'h0f;
+      M_reg7_en = 1'h0;
+      if (M_reg7_out[0+3-:4] == M_reg1_out[0+3-:4]) begin
+        
+      end else begin
+        if (M_reg7_out[0+3-:4] == M_reg2_out[0+3-:4]) begin
+          
+        end else begin
+          if (M_reg7_out[0+3-:4] == M_reg3_out[0+3-:4]) begin
+            
+          end else begin
+            
+          end
+        end
+      end
     end
   end
   

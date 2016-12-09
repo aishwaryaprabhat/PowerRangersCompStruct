@@ -1,0 +1,15 @@
+module decoder(
+    input in[2],
+    output out[4]
+  ) {
+ 
+  always{
+    case (in) {
+      0: out = 4b1000;
+      1: out = 4b0100;
+      2: out = 4b0010;
+      3: out = 4b0001;
+      default: out = 4bxxxx;
+    }
+  }
+}
