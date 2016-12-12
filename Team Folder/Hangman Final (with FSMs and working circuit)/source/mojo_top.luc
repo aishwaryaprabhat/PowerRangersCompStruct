@@ -24,11 +24,11 @@ module mojo_top (
     input keypadp2in[4],        //row
     output keypadp2out[4],       //coloumn
     
-    output matrixcol[8],
-    output matrixrow[8]
-    //output hangmansel1[8],
-    //output hangmansel2[8]
+    output matrixsel1[8],
+    output matrixrow1[8],
     
+    output matrixsel2[8],
+    output matrixrow2[8]
   ) {
   
   sig rst;                      // reset signal
@@ -42,9 +42,7 @@ module mojo_top (
         
       keypad_reader keypad1;
       keypad_reader keypad2;
-      
-      //hangman_display hangman;
-                     
+                          
       dff regcounter[3];
       dff key[8];
       dff lives[3];
@@ -57,6 +55,8 @@ module mojo_top (
       register reg6;           //p2 d2
       register reg7;           //p2 d3
       register reg8;           //p2 d4
+      
+      hangman_display hangman;
     }
   }
      
@@ -127,8 +127,8 @@ always {
         }
         else{
           lives.d = lives.q+1;
+          key.d=keypad2.key;
         }
-        key.d=keypad2.key;
       }
     }
     
@@ -150,15 +150,13 @@ always {
     
     //led = lives.q;
     
-    //hangman.wrong = lives.q;
+    hangman.wrong = lives.q;
     
-    //matrixcol = hangman.matrixrow;
-    //hangmanrow2 = hangman.matrixrow;
-    //matrixcol = hangman.matrixsel[15:8];
-    //matrixrow = hangman.matrixsel;
+    matrixsel1 = hangman.outsel1;
+    matrixrow1 = hangman.outpic1[hangman.ct];
     
-    matrixcol = lives.q;
-    matrixrow = 8b0;
+    matrixsel2 = hangman.outsel2;
+    matrixrow2 = hangman.outpic2[hangman.ct];
     
     spi_miso = bz;                                // not using SPI
     spi_channel = bzzzz;                          // not using flags
